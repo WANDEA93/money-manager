@@ -26,7 +26,7 @@ export class LimitItemComponent {
     if(!this.limit){
       return 0;
     }
-    return (this.limit.amount / this.limit.maxAmount) * 100;
+    return (this.limit.amount / this.limit.maxAmount);
   }
 
 }

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import {addIcons} from "ionicons";
-import {beerOutline, carSportOutline, ellipse, homeOutline, square, triangle} from "ionicons/icons";
+import {beerOutline, carSportOutline, ellipse, homeOutline, square, triangle, walletOutline} from "ionicons/icons";
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ import {beerOutline, carSportOutline, ellipse, homeOutline, square, triangle} fr
 export class HomePage  {
 
   constructor() {
-    addIcons({ triangle, ellipse, square, beerOutline, homeOutline, carSportOutline });
+    addIcons({ triangle, ellipse, square, beerOutline, homeOutline, carSportOutline, walletOutline });
   }
 
 

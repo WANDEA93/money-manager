@@ -20,14 +20,14 @@ export class MonthlyLimitsService {
       {
         name: 'fuel',
         maxAmount: 30000,
-        amount: 0,
+        amount: 5000,
         icon: 'car-sport-outline',
         color: 'primary'
       },
       {
         name: 'bills',
         maxAmount: 20000,
-        amount: 0,
+        amount: 2000,
         icon: 'home-outline',
         color: 'danger'
       },
@@ -37,6 +37,13 @@ export class MonthlyLimitsService {
         amount: 0,
         icon: 'beer-outline',
         color: 'success'
+      },
+      {
+        name: 'pocket',
+        maxAmount: 20000,
+        amount: 0,
+        icon: 'wallet-outline',
+        color: 'medium'
       }
     ];
   }
