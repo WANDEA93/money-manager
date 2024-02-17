@@ -4,7 +4,7 @@
     <ion-icon slot="start" [name]="limit.icon"  size="large"></ion-icon>
     }
     <ion-label>
-      <h2>{{ limit.name }}</h2>
+      <h2>{{ limit.name | itemTitle}}</h2>
     </ion-label>
     <ion-note slot="end"> {{limit.amount}} /{{limit.maxAmount}}</ion-note>
 

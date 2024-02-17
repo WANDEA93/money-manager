@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {LimitModel} from "../../models.LimitModel";
 import {IonicModule} from "@ionic/angular";
 import {addIcons} from "ionicons";
+import {ItemTitlePipe} from "../../pipes/item-title.pipe";
 
 
 @Component({
@@ -10,7 +11,8 @@ import {addIcons} from "ionicons";
   templateUrl: './limit-item.component.html',
   styleUrls: ['./limit-item.component.scss'],
   imports: [
-    IonicModule
+    IonicModule,
+    ItemTitlePipe
   ]
 })
 export class LimitItemComponent {
