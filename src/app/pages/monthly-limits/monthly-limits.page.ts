@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import {MonthlyLimit} from "../../models/monthly-limit";
+import {MonthlyLimitModel} from "../../models/monthly-limit-model";
 import {LimitItemComponent} from "../../components/limit-item/limit-item.component";
 import {MonthlyLimitsService} from "../../services/monthly-limits.service";
 import {addIcons} from "ionicons";
 import {beer, beerOutline, ellipse, square, triangle} from "ionicons/icons";
+import {MonthlyLimitDetail, MonthlyLimitHeader} from "../../models/monthly-limit";
+import {LimitEntryViewService} from "../../services/limit-entry-view.service";
 
 @Component({
   selector: 'app-monthly-limits',
@@ -17,13 +19,19 @@ import {beer, beerOutline, ellipse, square, triangle} from "ionicons/icons";
 })
 export class MonthlyLimitsPage implements OnInit {
 
-  public limits?: MonthlyLimit[] = [];
-  constructor(private limitService: MonthlyLimitsService) {
+  public limits?: MonthlyLimitDetail[] = [];
+  constructor(private limitService: MonthlyLimitsService,
+              private limitsEntryViewService: LimitEntryViewService) {
 
   }
 
   ngOnInit() {
-    this.limits = this.limitService.monthlyLimits;
+   this.limitService.getActiveMonthlyLimit().subscribe(
+     (header: MonthlyLimitHeader) => {
+       this.limits = header.details;
+       this.limitsEntryViewService.setMonthlyLimitHeader(header);
+     }
+   )
   }
 
 }

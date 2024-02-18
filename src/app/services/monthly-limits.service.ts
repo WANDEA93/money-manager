@@ -1,50 +1,61 @@
 import { Injectable } from '@angular/core';
-import {MonthlyLimit} from "../models/monthly-limit";
+import {MonthlyLimitModel} from "../models/monthly-limit-model";
+import {Observable, of} from "rxjs";
+import {MonthlyLimitHeader} from "../models/monthly-limit";
+import {ExpenditureEntry} from "../models/expenditure-entry";
+import {MockDataProvider} from "../mock-data/mock-data.provider";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MonthlyLimitsService {
 
-  private _monthlyLimits: MonthlyLimit[] = [];
-  get monthlyLimits(): MonthlyLimit[] {
-    return this._monthlyLimits;
+  private _monthlyLimitModels: MonthlyLimitModel[] = [
+    {
+      name: 'fuel',
+      maxAmount: 30000,
+      icon: 'car-sport-outline',
+      color: 'primary'
+    },
+    {
+      name: 'bills',
+      maxAmount: 20000,
+      icon: 'home-outline',
+      color: 'danger'
+    },
+    {
+      name: 'liquor',
+      maxAmount: 20000,
+      icon: 'beer-outline',
+      color: 'success'
+    },
+    {
+      name: 'pocket',
+      maxAmount: 20000,
+      icon: 'wallet-outline',
+      color: 'medium'
+    }
+  ];
+
+  private dummyActiveMonthlyHeader: MonthlyLimitHeader = MockDataProvider.getActiveModel();
+
+  public getModel(name: string): MonthlyLimitModel | undefined {
+    return this._monthlyLimitModels.find(m => m.name === name);
   }
 
   constructor() {
-    this.initLimitModels();
   }
 
-  private initLimitModels(): void {
-    this._monthlyLimits = [
-      {
-        name: 'fuel',
-        maxAmount: 30000,
-        amount: 5000,
-        icon: 'car-sport-outline',
-        color: 'primary'
-      },
-      {
-        name: 'bills',
-        maxAmount: 20000,
-        amount: 2000,
-        icon: 'home-outline',
-        color: 'danger'
-      },
-      {
-        name: 'liquor',
-        maxAmount: 20000,
-        amount: 0,
-        icon: 'beer-outline',
-        color: 'success'
-      },
-      {
-        name: 'pocket',
-        maxAmount: 20000,
-        amount: 0,
-        icon: 'wallet-outline',
-        color: 'medium'
-      }
-    ];
+  public getActiveMonthlyLimit(): Observable<MonthlyLimitHeader> {
+     return of(this.dummyActiveMonthlyHeader);
   }
+
+  public addEntry(entry: ExpenditureEntry): void {
+    throw new Error('this is not implemented yet.');
+    return;
+  }
+
+
+
+
 }
