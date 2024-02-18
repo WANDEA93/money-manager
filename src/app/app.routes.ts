@@ -2,7 +2,12 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./pages/home/home-routes.module').then(m => m.routes)
+    path: 'limits/:name',
+    loadChildren: () => import('./routes/monthly-limits.routes').then(m => m.monthlyRoutes)
   },
+  {
+    path: '',
+    loadChildren: () => import('./routes/home-routes.module').then(m => m.routes)
+  }
+
 ];

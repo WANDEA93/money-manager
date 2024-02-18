@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {LimitModel} from "../models.LimitModel";
+import {LimitModel} from "../models/LimitModel";
 
 @Injectable({
   providedIn: 'root'

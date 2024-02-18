@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LimitModel} from "../../models.LimitModel";
+import {LimitModel} from "../../models/LimitModel";
 import {IonicModule} from "@ionic/angular";
 import {addIcons} from "ionicons";
 import {ItemTitlePipe} from "../../pipes/item-title.pipe";
