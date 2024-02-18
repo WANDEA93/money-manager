@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {addIcons} from "ionicons";
 import {checkmark, close} from "ionicons/icons";
@@ -24,9 +24,9 @@ export class AddLimitEntryPage {
 
     addIcons({checkmark, close})
     this.form = new FormGroup({
-      amount: new FormControl(),
+      amount: new FormControl('', [Validators.required]),
       date: new FormControl(new Date().toDateString()),
-      vendor: new FormControl(),
+      vendor: new FormControl('', [Validators.required]),
       comment: new FormControl()
     });
   }

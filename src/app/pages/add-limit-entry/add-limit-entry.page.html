@@ -54,7 +54,7 @@
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="primary" (click)="onSave()">
-        <ion-button fill="solid" color="primary">
+        <ion-button [disabled]="form.invalid" fill="solid" color="primary">
           Save
           <ion-icon slot="end" name="checkmark"></ion-icon>
         </ion-button>
