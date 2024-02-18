@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LimitModel} from "../../models/LimitModel";
+import {MonthlyLimit} from "../../models/monthly-limit";
 import {IonicModule} from "@ionic/angular";
 import {addIcons} from "ionicons";
 import {ItemTitlePipe} from "../../pipes/item-title.pipe";
@@ -18,7 +18,7 @@ import {ItemTitlePipe} from "../../pipes/item-title.pipe";
 export class LimitItemComponent {
 
   @Input()
-  public limit?: LimitModel;
+  public limit?: MonthlyLimit;
 
   constructor() {
   }

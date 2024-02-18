@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {LimitModel} from "../models/LimitModel";
+import {MonthlyLimit} from "../models/monthly-limit";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MonthlyLimitsService {
 
-  private _monthlyLimits: LimitModel[] = [];
-  get monthlyLimits(): LimitModel[] {
+  private _monthlyLimits: MonthlyLimit[] = [];
+  get monthlyLimits(): MonthlyLimit[] {
     return this._monthlyLimits;
   }
 

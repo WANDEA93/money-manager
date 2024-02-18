@@ -1,4 +1,4 @@
-export interface LimitModel {
+export interface MonthlyLimit {
   name: string;
   label?: string;
   maxAmount: number;
