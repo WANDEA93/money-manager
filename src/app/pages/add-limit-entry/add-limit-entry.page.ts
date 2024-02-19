@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {addIcons} from "ionicons";
 import {checkmark, close} from "ionicons/icons";
 import {MonthlyLimitsService} from "../../services/monthly-limits.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ExpenditureEntry} from "../../models/expenditure-entry";
 
 @Component({
@@ -15,12 +15,14 @@ import {ExpenditureEntry} from "../../models/expenditure-entry";
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
 })
-export class AddLimitEntryPage {
+export class AddLimitEntryPage implements OnInit{
 
   public form: FormGroup;
+  private name: string = '';
 
   constructor(private limitService: MonthlyLimitsService,
-              private router: Router) {
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
 
     addIcons({checkmark, close})
     this.form = new FormGroup({
@@ -31,14 +33,22 @@ export class AddLimitEntryPage {
     });
   }
 
+  public ngOnInit(): void {
+    const name: string | null = this.activatedRoute.snapshot.paramMap.get('name');
+    if(name){
+      this.name = name;
+    }
+  }
+
   public onSave(): void {
+    if(!this.name){
+      return;
+    }
     const payload: any = this.form.value;
     if(payload['date'] === undefined){
       payload['date'] = new Date();
     }
-
-    this.limitService.addEntry(payload as ExpenditureEntry);
-
+    this.limitService.addEntry(payload as ExpenditureEntry, this.name);
   }
 
   public onCancel(): void {

@@ -50,9 +50,8 @@ export class MonthlyLimitsService {
      return of(this.dummyActiveMonthlyHeader);
   }
 
-  public addEntry(entry: ExpenditureEntry): void {
-    throw new Error('this is not implemented yet.');
-    return;
+  public addEntry(entry: ExpenditureEntry, name: string): void {
+
   }
 
 
