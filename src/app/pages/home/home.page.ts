@@ -5,11 +5,12 @@ import { IonicModule } from '@ionic/angular';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import {addIcons} from "ionicons";
 import {
+  archiveOutline,
   beerOutline,
-  carSportOutline,
+  carSportOutline, diamondOutline,
   ellipse,
-  fastFoodOutline,
-  homeOutline,
+  fastFoodOutline, fileTrayOutline,
+  homeOutline, rainyOutline,
   square,
   triangle,
   walletOutline
@@ -25,7 +26,7 @@ import {
 export class HomePage  {
 
   constructor() {
-    addIcons({ triangle, ellipse, square, beerOutline, homeOutline, carSportOutline, walletOutline, fastFoodOutline });
+    addIcons({ triangle, ellipse, square, beerOutline, homeOutline, carSportOutline, walletOutline, fastFoodOutline, fileTrayOutline, archiveOutline, diamondOutline, rainyOutline });
   }
 
 

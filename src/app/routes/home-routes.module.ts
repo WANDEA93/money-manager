@@ -12,6 +12,10 @@ export const routes: Routes = [
         loadComponent: () => import('../pages/monthly-limits/monthly-limits.page').then((m) => m.MonthlyLimitsPage)
       },
       {
+        path: 'history',
+        loadComponent: () => import('../pages/monthly-limit-history/monthly-limit-history.page').then((m) => m.MonthlyLimitHistoryPage)
+      },
+      {
         path: 'savings',
         loadComponent: () =>
           import('../pages/savings/savings.page').then((m) => m.SavingsPage),
