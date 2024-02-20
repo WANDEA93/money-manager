@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MonthlyLimitModel} from "../models/monthly-limit-model";
-import {from, Observable, of, take} from "rxjs";
+import {Observable, of} from "rxjs";
 import {MonthlyLimitDetail, MonthlyLimitHeader} from "../models/monthly-limit";
 import {ExpenditureEntry} from "../models/expenditure-entry";
 import {MockDataProvider} from "../mock-data/mock-data.provider";
@@ -56,21 +56,29 @@ export class MonthlyLimitsService {
   }
 
   constructor(private storageService: StorageService) {
-    this.getActiveMonthlyLimit().pipe(take(1)).subscribe((limit: MonthlyLimitHeader) => {
+    this.storageService.get(this.DB_KEY_ACTIVE_LIMIT)?.then(limit => {
       this.activeMonthlyHeader = limit;
-      if(!this.activeMonthlyHeader){
+      if (this.activeMonthlyHeader == undefined) {
         this.createActiveMonthlyLimit(new Date().getMonth());
       }
     });
+
+    this.storageService.get(this.DB_KEY_LIMIT_HISTORY)?.then(history => {
+      this.previousMonthlyHeaders = history || [MockDataProvider.getActiveModel()];
+    })
   }
 
   public getActiveMonthlyLimit(): Observable<MonthlyLimitHeader> {
     return of(this.activeMonthlyHeader);
   }
 
+  public getMonthlyLimitHistory(): Observable<MonthlyLimitHeader[]> {
+    return of(this.previousMonthlyHeaders);
+  }
+
   public addEntry(entry: ExpenditureEntry, name: string): void {
     const limitDetail: MonthlyLimitDetail | undefined = this.activeMonthlyHeader.details.find(d => d.name === name);
-    if(!limitDetail){
+    if (!limitDetail) {
       return;
     }
 
@@ -81,12 +89,12 @@ export class MonthlyLimitsService {
 
   public removeEntry(name: string, id: number): void {
     const limitDetail: MonthlyLimitDetail | undefined = this.activeMonthlyHeader.details.find(d => d.name === name);
-    if(!limitDetail){
+    if (!limitDetail) {
       return;
     }
 
     const entryIndex: number = limitDetail.entries.findIndex(e => e.id === id);
-    if(entryIndex === -1){
+    if (entryIndex === -1) {
       return;
     }
     const entry: ExpenditureEntry = limitDetail.entries[entryIndex];
@@ -100,7 +108,7 @@ export class MonthlyLimitsService {
     this.previousMonthlyHeaders.push(this.activeMonthlyHeader);
     this.activeMonthlyHeader = {
       month: month,
-      year: year != undefined ? year : new Date().getFullYear(),
+      year: year != undefined ? year : this.getYear(month),
       details: this.getDetails()
     }
     this.saveActiveLimit();
@@ -122,6 +130,15 @@ export class MonthlyLimitsService {
 
   private savePreviousMonthlyLimits(): void {
     this.storageService.set(this.DB_KEY_LIMIT_HISTORY, this.previousMonthlyHeaders);
+  }
+
+  private getYear(month: Month): number {
+    const currentYear: number = new Date().getFullYear();
+    if (month === Month.JANUARY) {
+      return currentYear + 1;
+    } else {
+      return currentYear;
+    }
   }
 
 
