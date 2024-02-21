@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <app-toolbar title="Add New Monthly Limit"></app-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-select label="Month" labelPlacement="floating" placeholder="Month" formControlName="month">
+          @for (month of monthLabels; track month) {
+            <ion-select-option [value]="$index">{{ month }}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-input label="Year" labelPlacement="floating" type="number" formControlName="year"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="secondary" (click)="onCancel()">
+      <ion-button fill="solid" color="medium">
+        <ion-icon slot="start" name="close"></ion-icon>
+        Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary" (click)="onSave()">
+      <ion-button [disabled]="form.invalid" fill="solid" color="primary">
+        Save
+        <ion-icon slot="end" name="checkmark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

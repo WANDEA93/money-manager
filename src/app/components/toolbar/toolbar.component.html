@@ -12,12 +12,12 @@
   }
 </ion-toolbar>
 
-<ion-popover trigger="click-trigger" triggerAction="click">
+<ion-popover trigger="click-trigger" triggerAction="click" [isOpen]="isOpen" (didDismiss)="isOpen = false" >
   <ng-template>
     <ion-content class="ion-padding">
       <ion-list>
-        <ion-item button="true" detail="false" lines="full">
-          <ion-icon size="small" name="add-circle-outline"></ion-icon>
+        <ion-item button="true" detail="false" lines="full" (click)="goToAddNewMonth()">
+<!--          <ion-icon size="small" name="add-circle-outline"></ion-icon>-->
           <ion-label>New Month</ion-label>
         </ion-item>
       </ion-list>
