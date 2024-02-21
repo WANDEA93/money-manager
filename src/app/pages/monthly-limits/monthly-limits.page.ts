@@ -9,13 +9,14 @@ import {addIcons} from "ionicons";
 import {beer, beerOutline, ellipse, square, triangle} from "ionicons/icons";
 import {MonthlyLimitDetail, MonthlyLimitHeader} from "../../models/monthly-limit";
 import {LimitEntryViewService} from "../../services/limit-entry-view.service";
+import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 
 @Component({
   selector: 'app-monthly-limits',
   templateUrl: './monthly-limits.page.html',
   styleUrls: ['./monthly-limits.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, LimitItemComponent]
+  imports: [IonicModule, CommonModule, FormsModule, LimitItemComponent, ToolbarComponent]
 })
 export class MonthlyLimitsPage implements OnInit {
 

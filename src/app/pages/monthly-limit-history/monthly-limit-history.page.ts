@@ -5,13 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import {MonthlyLimitsService} from "../../services/monthly-limits.service";
 import {MonthlyLimitHeader} from "../../models/monthly-limit";
 import {take} from "rxjs";
+import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 
 @Component({
   selector: 'app-monthly-limit-history',
   templateUrl: './monthly-limit-history.page.html',
   styleUrls: ['./monthly-limit-history.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, ToolbarComponent]
 })
 export class MonthlyLimitHistoryPage implements OnInit {
 
