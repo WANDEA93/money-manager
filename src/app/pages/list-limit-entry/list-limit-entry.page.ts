@@ -9,13 +9,14 @@ import {LimitEntryViewService} from "../../services/limit-entry-view.service";
 import {MonthlyLimitDetail, MonthlyLimitHeader} from "../../models/monthly-limit";
 import {ItemTitlePipe} from "../../pipes/item-title.pipe";
 import {Router} from "@angular/router";
+import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 
 @Component({
   selector: 'app-list-limit-entry',
   templateUrl: './list-limit-entry.page.html',
   styleUrls: ['./list-limit-entry.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule ],
+    imports: [IonicModule, CommonModule, FormsModule, ToolbarComponent],
   providers: [ItemTitlePipe]
 })
 export class ListLimitEntryPage implements OnInit {

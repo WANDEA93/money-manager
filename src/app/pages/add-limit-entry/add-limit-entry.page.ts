@@ -7,13 +7,14 @@ import {checkmark, close} from "ionicons/icons";
 import {MonthlyLimitsService} from "../../services/monthly-limits.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ExpenditureEntry} from "../../models/expenditure-entry";
+import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 
 @Component({
   selector: 'app-add-limit-entry',
   templateUrl: './add-limit-entry.page.html',
   styleUrls: ['./add-limit-entry.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, ToolbarComponent]
 })
 export class AddLimitEntryPage implements OnInit{
 
