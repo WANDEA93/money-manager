@@ -6,6 +6,7 @@ import {MonthlyLimitsService} from "../../services/monthly-limits.service";
 import {MonthlyLimitHeader} from "../../models/monthly-limit";
 import {take} from "rxjs";
 import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
+import {LimitEntryViewService} from "../../services/limit-entry-view.service";
 
 @Component({
   selector: 'app-monthly-limit-history',
@@ -17,10 +18,8 @@ import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 export class MonthlyLimitHistoryPage implements OnInit {
 
   public history: Record<string, MonthlyLimitHeader[]> = {};
-
-
-
-  constructor(private limitsService: MonthlyLimitsService) { }
+  constructor(private limitsService: MonthlyLimitsService,
+              private limitsViewService: LimitEntryViewService) { }
 
   ngOnInit() {
     this.limitsService.getMonthlyLimitHistory().pipe(take(1)).subscribe((history) => {
@@ -49,7 +48,15 @@ export class MonthlyLimitHistoryPage implements OnInit {
   }
 
   public goToDetails(year: string, month: string): void {
-    console.log(`year: ${year}, month: ${month}`)
+    const monthlyHeader: MonthlyLimitHeader = this.getHeader(year, +month);
+    this.limitsViewService.setMonthlyLimitHeader(monthlyHeader)
+    // this.limitsViewService.setMonthlyLimit(monthlyHeader.details);
+  }
+
+  private getHeader(year: string, month: number): MonthlyLimitHeader {
+    const monthlyHeaders: MonthlyLimitHeader[] = this.history[year];
+    const header = monthlyHeaders.find(m => m.month === month);
+    return header!;
   }
 
 }
