@@ -1,12 +1,12 @@
-@if (limit && model) {
+@if (limitDetail && model) {
   <ion-item detail="false" button="true" lines="none" (click)="setView()" >
     @if(model.icon) {
     <ion-icon slot="start" [name]="model.icon"  size="large"></ion-icon>
     }
     <ion-label>
-      <h2>{{ limit.name | itemTitle}}</h2>
+      <h2>{{ limitDetail.name | itemTitle}}</h2>
     </ion-label>
-    <ion-note slot="end"> {{limit.amount}} /{{model.maxAmount}}</ion-note>
+    <ion-note slot="end"> {{limitDetail.amount}} /{{model.maxAmount}}</ion-note>
 
   </ion-item>
   <ion-progress-bar [value]="calculatePercentage()" [color]="model.color"></ion-progress-bar>

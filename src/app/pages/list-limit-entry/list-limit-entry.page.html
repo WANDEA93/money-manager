@@ -4,7 +4,7 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    @for (entry of entries; track entry.id){
+    @for (entry of detail?.entries; track entry.id){
     <ion-item [button]="false" detail="false">
       <ion-icon color="danger" slot="start" name="reader" size="large"></ion-icon>
        <ion-label>
