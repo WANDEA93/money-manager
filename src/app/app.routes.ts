@@ -7,7 +7,7 @@ export const routes: Routes = [
   },
   {
     path: 'add-new-monthly-limit',
-    loadComponent: () => import('./pages/add-new-monthly-limit/add-new-monthly-limit.page').then( m => m.AddNewMonthlyLimitPage)
+    loadComponent: () => import('./pages/add-new-month/add-new-month.page').then(m => m.AddNewMonthPage)
   },
   {
     path: '',

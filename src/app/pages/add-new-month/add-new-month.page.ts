@@ -8,12 +8,12 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-new-monthly-limit',
-  templateUrl: './add-new-monthly-limit.page.html',
-  styleUrls: ['./add-new-monthly-limit.page.scss'],
+  templateUrl: './add-new-month.page.html',
+  styleUrls: ['./add-new-month.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, ToolbarComponent, ReactiveFormsModule]
 })
-export class AddNewMonthlyLimitPage {
+export class AddNewMonthPage {
 
   public form: FormGroup;
 
