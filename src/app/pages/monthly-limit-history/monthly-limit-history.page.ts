@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {IonicModule} from '@ionic/angular';
 import {MonthlyLimitsService} from "../../services/monthly-limits.service";
 import {MonthlyLimitHeader} from "../../models/monthly-limit";
-import {take} from "rxjs";
 import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
-import {LimitEntryViewService} from "../../services/limit-entry-view.service";
+import {MonthlyLimitsViewService} from "../../services/monthly-limits-view.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-monthly-limit-history',
@@ -18,17 +18,19 @@ import {LimitEntryViewService} from "../../services/limit-entry-view.service";
 export class MonthlyLimitHistoryPage implements OnInit {
 
   public history: Record<string, MonthlyLimitHeader[]> = {};
-  constructor(private limitsService: MonthlyLimitsService,
-              private limitsViewService: LimitEntryViewService) { }
+
+  constructor(private monthlyLimitsViewService: MonthlyLimitsViewService,
+              private router: Router) {
+  }
 
   ngOnInit() {
-    this.limitsService.getMonthlyLimitHistory().pipe(take(1)).subscribe((history) => {
-      this.processHeaders(history);
-    })
+    this.monthlyLimitsViewService.selectedPreviousHeaders.subscribe((headers: MonthlyLimitHeader[]) => {
+      this.processHeaders(headers);
+    });
   }
 
   private processHeaders(headers: MonthlyLimitHeader[]): void {
-    const groupedHeaders =  headers.reduce((result, currentValue) => {
+    const groupedHeaders = headers.reduce((result, currentValue) => {
       const key = currentValue['year'];
       if (!result[key]) {
         result[key] = [];
@@ -49,7 +51,9 @@ export class MonthlyLimitHistoryPage implements OnInit {
 
   public goToDetails(year: string, month: string): void {
     const monthlyHeader: MonthlyLimitHeader = this.getHeader(year, +month);
-    this.limitsViewService.setMonthlyLimitHeader(monthlyHeader)
+    this.monthlyLimitsViewService.selectPreviousHeader(monthlyHeader.id);
+
+    this.router.navigate(['previous-months', monthlyHeader.id]);
     // this.limitsViewService.setMonthlyLimit(monthlyHeader.details);
   }
 

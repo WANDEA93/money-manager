@@ -1,14 +1,13 @@
 <ion-header [translucent]="true">
-  <app-toolbar title="Monthly Limits"></app-toolbar>
+  <app-toolbar [title]="getPageTitle()"></app-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-list >
-    @for(l of limits; track l.name){
-      <app-limit-item [limit]="l"></app-limit-item>
+    @for(l of header?.details; track l.name){
+      <app-limit-item [limitDetail]="l"></app-limit-item>
     } @empty {
       <ion-note>There are no limits to display</ion-note>
     }
-
   </ion-list>
 </ion-content>

@@ -1,11 +1,11 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MonthlyLimitModel} from "../../models/monthly-limit-model";
 import {IonicModule} from "@ionic/angular";
 import {ItemTitlePipe} from "../../pipes/item-title.pipe";
 import {MonthlyLimitsService} from "../../services/monthly-limits.service";
 import {MonthlyLimitDetail} from "../../models/monthly-limit";
-import {LimitEntryViewService} from "../../services/limit-entry-view.service";
 import {Router} from "@angular/router";
+import {MonthlyLimitsViewService} from "../../services/monthly-limits-view.service";
 
 
 @Component({
@@ -18,27 +18,25 @@ import {Router} from "@angular/router";
     ItemTitlePipe
   ]
 })
-export class LimitItemComponent implements OnChanges {
+export class LimitItemComponent implements OnInit {
 
   @Input()
-  public limit?: MonthlyLimitDetail;
+  public limitDetail?: MonthlyLimitDetail;
 
   public model?: MonthlyLimitModel;
 
   constructor(private limitService: MonthlyLimitsService,
-              private limitViewService: LimitEntryViewService,
+              private limitViewService: MonthlyLimitsViewService,
               private router: Router) {
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['limit']) {
-      this.initModel();
-    }
+  public ngOnInit(): void {
+    this.initModel();
   }
 
   private initModel(): void {
-    if (this.limit) {
-      const model = this.limitService.getModel(this.limit?.name);
+    if (this.limitDetail) {
+      const model = this.limitService.getModel(this.limitDetail?.name);
       if (model) {
         this.model = model;
       }
@@ -46,16 +44,16 @@ export class LimitItemComponent implements OnChanges {
   }
 
   public calculatePercentage(): number {
-    if (!this.limit || !this.model) {
+    if (!this.limitDetail || !this.model) {
       return 0;
     }
-    return (this.limit.amount / this.model.maxAmount);
+    return (this.limitDetail.amount / this.model.maxAmount);
   }
 
   public setView(): void {
-    if (this.limit) {
-      this.limitViewService.setMonthlyLimit(this.limit);
-      this.router.navigate(['/limits', this.limit.name]);
+    if (this.limitDetail) {
+      this.limitViewService.setActiveDetails(this.limitDetail);
+      this.router.navigate(['/limits', this.limitDetail.name]);
     }
   }
 

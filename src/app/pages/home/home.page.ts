@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
+import {Component} from '@angular/core';
+import {IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs} from '@ionic/angular/standalone';
 import {addIcons} from "ionicons";
 import {
   archiveOutline,
   beerOutline,
-  carSportOutline, diamondOutline,
+  carSportOutline,
+  diamondOutline,
   ellipse,
-  fastFoodOutline, fileTrayOutline,
-  homeOutline, rainyOutline,
+  fastFoodOutline,
+  fileTrayOutline,
+  homeOutline,
+  rainyOutline,
   square,
   triangle,
   walletOutline
@@ -26,7 +26,20 @@ import {
 export class HomePage  {
 
   constructor() {
-    addIcons({ triangle, ellipse, square, beerOutline, homeOutline, carSportOutline, walletOutline, fastFoodOutline, fileTrayOutline, archiveOutline, diamondOutline, rainyOutline });
+    addIcons({
+      triangle,
+      ellipse,
+      square,
+      beerOutline,
+      homeOutline,
+      carSportOutline,
+      walletOutline,
+      fastFoodOutline,
+      fileTrayOutline,
+      archiveOutline,
+      diamondOutline,
+      rainyOutline
+    });
   }
 
 

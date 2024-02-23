@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import {MonthlyLimitModel} from "../../models/monthly-limit-model";
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {IonicModule} from '@ionic/angular';
 import {LimitItemComponent} from "../../components/limit-item/limit-item.component";
-import {MonthlyLimitsService} from "../../services/monthly-limits.service";
-import {addIcons} from "ionicons";
-import {beer, beerOutline, ellipse, square, triangle} from "ionicons/icons";
-import {MonthlyLimitDetail, MonthlyLimitHeader} from "../../models/monthly-limit";
-import {LimitEntryViewService} from "../../services/limit-entry-view.service";
+import {MonthlyLimitHeader} from "../../models/monthly-limit";
 import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
+import {MonthlyLimitsViewService} from "../../services/monthly-limits-view.service";
 
 @Component({
   selector: 'app-monthly-limits',
@@ -20,19 +16,19 @@ import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 })
 export class MonthlyLimitsPage implements OnInit {
 
-  public limits?: MonthlyLimitDetail[] = [];
-  constructor(private limitService: MonthlyLimitsService,
-              private limitsEntryViewService: LimitEntryViewService) {
+  public header?: MonthlyLimitHeader;
 
+  constructor(private monthlyLimitsViewService: MonthlyLimitsViewService) {
   }
 
   ngOnInit() {
-   this.limitService.getActiveMonthlyLimit().subscribe(
-     (header: MonthlyLimitHeader) => {
-       this.limits = header.details;
-       this.limitsEntryViewService.setMonthlyLimitHeader(header);
-     }
-   )
+    this.monthlyLimitsViewService.selectedHeader.subscribe((header) => {
+      this.header = header;
+    });
   }
 
+  public getPageTitle(): string {
+    const month: number = this.header ? this.header.month + 1 : 0;
+    return `Monthly Limits - ${month}/${this.header?.year}`
+  }
 }

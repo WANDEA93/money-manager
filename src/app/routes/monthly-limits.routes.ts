@@ -1,6 +1,6 @@
 import {Routes} from "@angular/router";
 
-export const monthlyRoutes: Routes = [
+export const monthlyLimitsRoutes: Routes = [
   {
     path: '',
     loadComponent: () => import('../pages/list-limit-entry/list-limit-entry.page').then(c => c.ListLimitEntryPage)
@@ -8,5 +8,5 @@ export const monthlyRoutes: Routes = [
   {
     path: 'add',
     loadComponent: () => import('../pages/add-limit-entry/add-limit-entry.page').then(c => c.AddLimitEntryPage)
-  }
+  },
 ];
