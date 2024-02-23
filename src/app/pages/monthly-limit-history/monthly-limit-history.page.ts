@@ -25,7 +25,9 @@ export class MonthlyLimitHistoryPage implements OnInit {
   }
 
   ngOnInit() {
-    this.processHeaders(this.limitsService.getMonthlyLimitHistoryList());
+    this.monthlyLimitsViewService.selectedPreviousHeaders.subscribe((headers: MonthlyLimitHeader[]) => {
+      this.processHeaders(headers);
+    });
   }
 
   private processHeaders(headers: MonthlyLimitHeader[]): void {
@@ -50,6 +52,7 @@ export class MonthlyLimitHistoryPage implements OnInit {
 
   public goToDetails(year: string, month: string): void {
     const monthlyHeader: MonthlyLimitHeader = this.getHeader(year, +month);
+    this.monthlyLimitsViewService.selectPreviousHeader(monthlyHeader.id);
 
     this.router.navigate(['/home/monthly-limits'])
     // this.limitsViewService.setMonthlyLimit(monthlyHeader.details);

@@ -1,6 +1,8 @@
 import {Routes} from "@angular/router";
 
 import {HomePage} from "../pages/home/home.page";
+import {ActiveLimitResolver} from "../resolvers/active-limit.resolver";
+import {LimitsHistoryResolver} from "../resolvers/limits-history.resolver";
 
 export const routes: Routes = [
   {
@@ -8,12 +10,18 @@ export const routes: Routes = [
     component: HomePage,
     children: [
       {
-        path: 'monthly-limits/:id',
-        loadComponent: () => import('../pages/monthly-limits/monthly-limits.page').then((m) => m.MonthlyLimitsPage)
+        path: 'monthly-limits',
+        loadComponent: () => import('../pages/monthly-limits/monthly-limits.page').then((m) => m.MonthlyLimitsPage),
+        resolve: [ActiveLimitResolver]
       },
       {
         path: 'history',
-        loadComponent: () => import('../pages/monthly-limit-history/monthly-limit-history.page').then((m) => m.MonthlyLimitHistoryPage)
+        loadComponent: () => import('../pages/monthly-limit-history/monthly-limit-history.page').then((m) => m.MonthlyLimitHistoryPage),
+        resolve: [LimitsHistoryResolver],
+        children: [{
+          path: 'monthly-limits',
+          loadComponent: () => import('../pages/monthly-limits/monthly-limits.page').then((m) => m.MonthlyLimitsPage),
+        }]
       },
       {
         path: 'savings',
