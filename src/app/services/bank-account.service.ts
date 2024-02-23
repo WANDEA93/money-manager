@@ -14,19 +14,25 @@ export class BankAccountService {
   private savingsAccEntries: LedgerEntry[] = [];
   private checkingAccEntries: LedgerEntry[] = [];
 
-  private savingsAccountBalance: number = 0;
-  private checkingAccountBalance: number = 0;
+  private _savingsAccountBalance: number = 0;
+  get savingsAccountBalance() {
+    return this._savingsAccountBalance;
+  }
+  private _checkingAccountBalance: number = 0;
+  get checkingAccountBalance(){
+    return this._checkingAccountBalance;
+  }
 
   private ledgerEntryTarget: LedgerEntryAccountType = 'savings';
 
   constructor(private storage: StorageService) {
     this.storage.get(BankAccountService.DB_KEY_SAVINGS_ACC_ENTRIES)?.then((entries) => {
       this.savingsAccEntries = entries;
-      this.savingsAccountBalance = this.calculateBalance(this.savingsAccEntries);
+      this._savingsAccountBalance = this.calculateBalance(this.savingsAccEntries);
     });
     this.storage.get(BankAccountService.DB_KEY_CHECKING_ACC_ENTRIES)?.then((entries) => {
       this.checkingAccEntries = entries;
-      this.checkingAccountBalance = this.calculateBalance(this.checkingAccEntries);
+      this._checkingAccountBalance = this.calculateBalance(this.checkingAccEntries);
     });
   }
 
@@ -51,11 +57,11 @@ export class BankAccountService {
     entry.date = new Date();
 
     if (this.ledgerEntryTarget === 'savings') {
-      entry.balance = entry.type === LedgerType.CREDIT ? this.savingsAccountBalance + entry.amount! : this.savingsAccountBalance - entry.amount!;
+      entry.balance = entry.type === LedgerType.CREDIT ? this._savingsAccountBalance + entry.amount! : this._savingsAccountBalance - entry.amount!;
       this.savingsAccEntries.push(entry as LedgerEntry);
       this.saveSavingAccountEntries();
     } else {
-      entry.balance = entry.type === LedgerType.CREDIT ? this.checkingAccountBalance + entry.amount! : this.checkingAccountBalance - entry.amount!;
+      entry.balance = entry.type === LedgerType.CREDIT ? this._checkingAccountBalance + entry.amount! : this._checkingAccountBalance - entry.amount!;
       this.checkingAccEntries.push(entry as LedgerEntry);
       this.saveCheckingAccountEntries();
     }

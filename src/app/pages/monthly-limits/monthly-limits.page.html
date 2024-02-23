@@ -7,7 +7,7 @@
     @for(l of header?.details; track l.name){
       <app-limit-item [limitDetail]="l"></app-limit-item>
     } @empty {
-      <ion-note>There are no limits to display</ion-note>
+      <ion-note><h2>There are no limits to display</h2></ion-note>
     }
   </ion-list>
 </ion-content>

@@ -5,6 +5,7 @@ import {IonicModule} from '@ionic/angular';
 import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 import {addIcons} from "ionicons";
 import {cashOutline, walletOutline} from "ionicons/icons";
+import {BankAccountService} from "../../services/bank-account.service";
 
 @Component({
   selector: 'app-savings',
@@ -13,13 +14,11 @@ import {cashOutline, walletOutline} from "ionicons/icons";
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, ToolbarComponent]
 })
-export class BankAccountsPage implements OnInit {
+export class BankAccountsPage {
 
-  constructor() {
+  constructor(public bankAccountService: BankAccountService) {
     addIcons({cashOutline, walletOutline})
   }
 
-  ngOnInit() {
-  }
 
 }
