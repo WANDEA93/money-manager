@@ -20,7 +20,7 @@ export const routes: Routes = [
         resolve: [LimitsHistoryResolver]
       },
       {
-        path: 'savings',
+        path: 'bank-accounts',
         loadComponent: () =>
           import('../pages/bank-accounts/bank-accounts-page.component').then((m) => m.BankAccountsPage),
       },

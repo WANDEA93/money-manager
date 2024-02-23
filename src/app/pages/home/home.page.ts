@@ -4,12 +4,13 @@ import {addIcons} from "ionicons";
 import {
   archiveOutline,
   beerOutline,
+  briefcaseOutline,
   carSportOutline,
-  diamondOutline,
   ellipse,
   fastFoodOutline,
-  fileTrayOutline,
+  fileTrayFullOutline,
   homeOutline,
+  idCardOutline,
   rainyOutline,
   square,
   triangle,
@@ -23,7 +24,7 @@ import {
   standalone: true,
   imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonTabs]
 })
-export class HomePage  {
+export class HomePage {
 
   constructor() {
     addIcons({
@@ -35,13 +36,13 @@ export class HomePage  {
       carSportOutline,
       walletOutline,
       fastFoodOutline,
-      fileTrayOutline,
+      fileTrayFullOutline,
       archiveOutline,
-      diamondOutline,
-      rainyOutline
+      idCardOutline,
+      rainyOutline,
+      briefcaseOutline
     });
   }
-
 
 
 }

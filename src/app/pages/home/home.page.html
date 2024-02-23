@@ -1,8 +1,13 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="monthly-limits" href="/monthly-limits/active" >
-      <ion-icon aria-hidden="true" name="file-tray-outline"></ion-icon>
+      <ion-icon aria-hidden="true" name="file-tray-full-outline"></ion-icon>
       <ion-label>Monthly Limits</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="bank-accounts" href="/bank-accounts">
+      <ion-icon aria-hidden="true" name="id-card-outline"></ion-icon>
+      <ion-label>Bank Accounts</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="history" href="/history">
@@ -10,14 +15,15 @@
       <ion-label>History</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="savings" href="/savings">
-      <ion-icon aria-hidden="true" name="diamond-outline"></ion-icon>
-      <ion-label>Savings</ion-label>
-    </ion-tab-button>
-
     <ion-tab-button tab="exceptions" href="/exceptions">
       <ion-icon aria-hidden="true" name="rainy-outline"></ion-icon>
       <ion-label>Exceptions</ion-label>
     </ion-tab-button>
+
+    <ion-tab-button tab="exceptions" href="/exceptions">
+      <ion-icon name="briefcase-outline"></ion-icon>
+      <ion-label>Loans</ion-label>
+    </ion-tab-button>
+
   </ion-tab-bar>
 </ion-tabs>
