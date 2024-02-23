@@ -4,6 +4,17 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <app-ledger-item></app-ledger-item>
+    @for(e of ledgerEntries; track e.id){
+    <app-ledger-item [entry]="e"></app-ledger-item>
+    }
+    @empty{
+      <ion-note><h2>No Entries to Display</h2></ion-note>
+    }
   </ion-list>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary">
+      <ion-icon name="add" (click)="addEntry()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

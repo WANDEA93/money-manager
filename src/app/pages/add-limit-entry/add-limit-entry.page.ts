@@ -8,13 +8,14 @@ import {MonthlyLimitsService} from "../../services/monthly-limits.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ExpenditureEntry} from "../../models/expenditure-entry";
 import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
+import {FormToolbarButtonsComponent} from "../../components/form-toolbar-buttons/form-toolbar-buttons.component";
 
 @Component({
   selector: 'app-add-limit-entry',
   templateUrl: './add-limit-entry.page.html',
   styleUrls: ['./add-limit-entry.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, ToolbarComponent]
+    imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, ToolbarComponent, FormToolbarButtonsComponent]
 })
 export class AddLimitEntryPage implements OnInit{
 
