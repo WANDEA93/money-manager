@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'limits/:name',
-    loadChildren: () => import('./routes/monthly-limits.routes').then(m => m.monthlyRoutes)
+    loadChildren: () => import('./routes/monthly-limits.routes').then(m => m.monthlyLimitsRoutes)
   },
   {
     path: 'add-new-monthly-limit',

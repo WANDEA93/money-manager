@@ -1,6 +1,7 @@
 import {ExpenditureEntry} from "./expenditure-entry";
 
 export interface MonthlyLimitHeader {
+  id: string;
   year: number;
   month: number; // 0 - 11
   details: MonthlyLimitDetail[];

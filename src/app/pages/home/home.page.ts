@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {IonIcon, IonLabel, IonTabBar, IonTabButton, IonTabs} from '@ionic/angular/standalone';
 import {addIcons} from "ionicons";
 import {
@@ -15,10 +15,6 @@ import {
   triangle,
   walletOutline
 } from "ionicons/icons";
-import {MonthlyLimitsService} from "../../services/monthly-limits.service";
-import {MonthlyLimitHeader} from "../../models/monthly-limit";
-import {MonthlyLimitsViewService} from "../../services/monthly-limits-view.service";
-import {take} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -27,10 +23,9 @@ import {take} from "rxjs";
   standalone: true,
   imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonTabs]
 })
-export class HomePage implements OnInit {
+export class HomePage  {
 
-  constructor(private limitService: MonthlyLimitsService,
-              private limitViewService: MonthlyLimitsViewService) {
+  constructor() {
     addIcons({
       triangle,
       ellipse,
@@ -47,13 +42,6 @@ export class HomePage implements OnInit {
     });
   }
 
-  public ngOnInit(): void {
-    this.limitService.getActiveMonthlyLimit().pipe(take(1)).subscribe(
-      (header: MonthlyLimitHeader) => {
-        this.limitViewService.header = header;
-      }
-    )
-  }
 
 
 }

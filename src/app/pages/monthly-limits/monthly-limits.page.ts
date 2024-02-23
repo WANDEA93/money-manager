@@ -3,9 +3,10 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {LimitItemComponent} from "../../components/limit-item/limit-item.component";
-import {MonthlyLimitDetail} from "../../models/monthly-limit";
+import {MonthlyLimitDetail, MonthlyLimitHeader} from "../../models/monthly-limit";
 import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 import {MonthlyLimitsViewService} from "../../services/monthly-limits-view.service";
+import {ActivatedRoute, ParamMap} from "@angular/router";
 
 @Component({
   selector: 'app-monthly-limits',
@@ -16,23 +17,36 @@ import {MonthlyLimitsViewService} from "../../services/monthly-limits-view.servi
 })
 export class MonthlyLimitsPage implements OnInit {
 
-  public limits?: MonthlyLimitDetail[] = [];
+  public header?: MonthlyLimitHeader;
 
-  constructor(private monthlyLimitsViewService: MonthlyLimitsViewService) {
+  constructor(private monthlyLimitsViewService: MonthlyLimitsViewService,
+              private activatedRoute: ActivatedRoute) {
 
   }
 
   ngOnInit() {
-    // this.limitService.getActiveMonthlyLimit().subscribe(
-    //   (header: MonthlyLimitHeader) => {
-    //     this.limits = header.details;
-    //     this.limitsEntryViewService.setMonthlyLimitHeader(header);
-    //   }
-    // )
-    const header = this.monthlyLimitsViewService.header;
-    if (header) {
-      this.limits = header.details;
-    }
+
+    this.monthlyLimitsViewService.selectedHeader.subscribe((header) => {
+      this.header = header;
+    });
+
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      if (!paramMap.has('id')) {
+        return;
+      }
+
+      const id: string = paramMap.get('id')!;
+      if (id === 'active') {
+        this.monthlyLimitsViewService.selectActiveHeader()
+      } else {
+        this.monthlyLimitsViewService.selectPreviousHeader(id);
+      }
+    });
+
+
   }
 
+  public getPageTitle(): string {
+    return `Monthly Limits - ${this.header?.month}/${this.header?.year}`
+  }
 }

@@ -5,6 +5,8 @@ import {IonicModule} from '@ionic/angular';
 import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 import {MonthlyLimitsService} from "../../services/monthly-limits.service";
 import {Router} from "@angular/router";
+import {addIcons} from "ionicons";
+import {checkmark, close} from "ionicons/icons";
 
 @Component({
   selector: 'app-add-new-monthly-limit',
@@ -20,6 +22,7 @@ export class AddNewMonthPage {
   constructor(private fb: FormBuilder,
               private monthlyLimitService: MonthlyLimitsService,
               private router: Router) {
+    addIcons({checkmark, close})
     this.form = this.fb.group({
       month: [''],
       year: []

@@ -1,9 +1,12 @@
 import {MonthlyLimitDetail, MonthlyLimitHeader} from "../models/monthly-limit";
+import {v4 as uudiv4} from "uuid";
+
 
 export class MockDataProvider {
 
   public static getActiveModel(): MonthlyLimitHeader {
     return {
+      id: uudiv4(),
       year: 2024,
       month: 1,
       details: MockDataProvider.getActiveDetails()

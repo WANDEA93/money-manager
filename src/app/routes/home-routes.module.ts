@@ -8,7 +8,7 @@ export const routes: Routes = [
     component: HomePage,
     children: [
       {
-        path: 'monthly-limits',
+        path: 'monthly-limits/:id',
         loadComponent: () => import('../pages/monthly-limits/monthly-limits.page').then((m) => m.MonthlyLimitsPage)
       },
       {

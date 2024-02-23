@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {IonicModule} from '@ionic/angular';
 import {MonthlyLimitsService} from "../../services/monthly-limits.service";
 import {MonthlyLimitHeader} from "../../models/monthly-limit";
-import {take} from "rxjs";
 import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 import {MonthlyLimitsViewService} from "../../services/monthly-limits-view.service";
 import {Router} from "@angular/router";
@@ -19,18 +18,18 @@ import {Router} from "@angular/router";
 export class MonthlyLimitHistoryPage implements OnInit {
 
   public history: Record<string, MonthlyLimitHeader[]> = {};
+
   constructor(private limitsService: MonthlyLimitsService,
               private monthlyLimitsViewService: MonthlyLimitsViewService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit() {
-    this.limitsService.getMonthlyLimitHistory().pipe(take(1)).subscribe((history) => {
-      this.processHeaders(history);
-    })
+    this.processHeaders(this.limitsService.getMonthlyLimitHistoryList());
   }
 
   private processHeaders(headers: MonthlyLimitHeader[]): void {
-    const groupedHeaders =  headers.reduce((result, currentValue) => {
+    const groupedHeaders = headers.reduce((result, currentValue) => {
       const key = currentValue['year'];
       if (!result[key]) {
         result[key] = [];
@@ -51,7 +50,6 @@ export class MonthlyLimitHistoryPage implements OnInit {
 
   public goToDetails(year: string, month: string): void {
     const monthlyHeader: MonthlyLimitHeader = this.getHeader(year, +month);
-    this.monthlyLimitsViewService.header = monthlyHeader;
 
     this.router.navigate(['/home/monthly-limits'])
     // this.limitsViewService.setMonthlyLimit(monthlyHeader.details);

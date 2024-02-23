@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {MonthlyLimitModel} from "../models/monthly-limit-model";
-import {Observable, of} from "rxjs";
 import {MonthlyLimitDetail, MonthlyLimitHeader} from "../models/monthly-limit";
 import {ExpenditureEntry} from "../models/expenditure-entry";
 import {MockDataProvider} from "../mock-data/mock-data.provider";
 import {StorageService} from "./storage.service";
 import {Month} from "../enums/month";
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -68,12 +68,16 @@ export class MonthlyLimitsService {
     })
   }
 
-  public getActiveMonthlyLimit(): Observable<MonthlyLimitHeader> {
-    return of(this.activeMonthlyHeader);
+  public getActiveMonthlyHeader(): MonthlyLimitHeader {
+    return this.activeMonthlyHeader;
   }
 
-  public getMonthlyLimitHistory(): Observable<MonthlyLimitHeader[]> {
-    return of(this.previousMonthlyHeaders);
+  public getMonthlyLimitHistoryList(): MonthlyLimitHeader[] {
+    return this.previousMonthlyHeaders;
+  }
+
+  public getMonthlyLimitHistory(id: string): MonthlyLimitHeader {
+    return this.previousMonthlyHeaders.find(header => header.id === id)!;
   }
 
   public addEntry(entry: ExpenditureEntry, name: string): void {
@@ -107,11 +111,13 @@ export class MonthlyLimitsService {
   public createActiveMonthlyLimit(month: Month, year?: number): void {
     this.previousMonthlyHeaders.push(this.activeMonthlyHeader);
     this.activeMonthlyHeader = {
+      id: uuidv4(),
       month: month,
       year: year != undefined ? year : this.getYear(month),
       details: this.getDetails()
     }
     this.saveActiveLimit();
+    this.savePreviousMonthlyLimits();
   }
 
   private getDetails(): MonthlyLimitDetail[] {
@@ -125,7 +131,7 @@ export class MonthlyLimitsService {
   }
 
   private saveActiveLimit(): void {
-    this.storageService.set(this.DB_KEY_ACTIVE_LIMIT, this.activeMonthlyHeader)
+    this.storageService.set(this.DB_KEY_ACTIVE_LIMIT, this.activeMonthlyHeader);
   }
 
   private savePreviousMonthlyLimits(): void {

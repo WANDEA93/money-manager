@@ -9,7 +9,7 @@ import {ItemTitlePipe} from "../../pipes/item-title.pipe";
 import {Router} from "@angular/router";
 import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 import {MonthlyLimitsViewService} from "../../services/monthly-limits-view.service";
-import {take} from "rxjs";
+import {combineLatest, merge, mergeAll, take, withLatestFrom, zip} from "rxjs";
 
 @Component({
   selector: 'app-list-limit-entry',
@@ -33,10 +33,12 @@ export class ListLimitEntryPage implements OnInit {
   }
 
   ngOnInit() {
-    this.limitViewService.activeDetail.pipe(take(1)).subscribe((monthlyDetail: MonthlyLimitDetail) => {
-      this.detail = monthlyDetail;
+    this.limitViewService.selectedDetail
+    .pipe(withLatestFrom(this.limitViewService.selectedHeader))
+      .subscribe(([detail, header ]) => {
+      this.header = header;
+      this.detail = detail;
       this.showAddEntry = this.limitViewService.showAddEntry;
-      this.header = this.limitViewService.header;
     });
   }
 
