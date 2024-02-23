@@ -6,7 +6,6 @@ import {LimitItemComponent} from "../../components/limit-item/limit-item.compone
 import {MonthlyLimitHeader} from "../../models/monthly-limit";
 import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 import {MonthlyLimitsViewService} from "../../services/monthly-limits-view.service";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-monthly-limits',
@@ -19,8 +18,7 @@ export class MonthlyLimitsPage implements OnInit {
 
   public header?: MonthlyLimitHeader;
 
-  constructor(private monthlyLimitsViewService: MonthlyLimitsViewService,
-              private activatedRoute: ActivatedRoute) {
+  constructor(private monthlyLimitsViewService: MonthlyLimitsViewService) {
   }
 
   ngOnInit() {
@@ -30,6 +28,7 @@ export class MonthlyLimitsPage implements OnInit {
   }
 
   public getPageTitle(): string {
-    return `Monthly Limits - ${this.header?.month}/${this.header?.year}`
+    const month: number = this.header ? this.header.month + 1 : 0;
+    return `Monthly Limits - ${month}/${this.header?.year}`
   }
 }
