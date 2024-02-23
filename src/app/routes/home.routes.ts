@@ -22,7 +22,7 @@ export const routes: Routes = [
       {
         path: 'savings',
         loadComponent: () =>
-          import('../pages/savings/savings.page').then((m) => m.SavingsPage),
+          import('../pages/bank-accounts/bank-accounts-page.component').then((m) => m.BankAccountsPage),
       },
       {
         path: 'exceptions',
