@@ -17,11 +17,7 @@ export const routes: Routes = [
       {
         path: 'history',
         loadComponent: () => import('../pages/monthly-limit-history/monthly-limit-history.page').then((m) => m.MonthlyLimitHistoryPage),
-        resolve: [LimitsHistoryResolver],
-        children: [{
-          path: 'monthly-limits',
-          loadComponent: () => import('../pages/monthly-limits/monthly-limits.page').then((m) => m.MonthlyLimitsPage),
-        }]
+        resolve: [LimitsHistoryResolver]
       },
       {
         path: 'savings',

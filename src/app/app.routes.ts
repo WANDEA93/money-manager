@@ -11,8 +11,12 @@ export const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./routes/home-routes.module').then(m => m.routes)
+    loadChildren: () => import('./routes/home.routes').then(m => m.routes)
   },
+  {
+    path: 'previous-months/:id',
+    loadComponent: () => import('./pages/monthly-limits/monthly-limits.page').then((m) => m.MonthlyLimitsPage),
+  }
 
 
 ];

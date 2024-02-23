@@ -8,5 +8,5 @@ export const monthlyLimitsRoutes: Routes = [
   {
     path: 'add',
     loadComponent: () => import('../pages/add-limit-entry/add-limit-entry.page').then(c => c.AddLimitEntryPage)
-  }
+  },
 ];

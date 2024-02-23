@@ -19,8 +19,7 @@ export class MonthlyLimitHistoryPage implements OnInit {
 
   public history: Record<string, MonthlyLimitHeader[]> = {};
 
-  constructor(private limitsService: MonthlyLimitsService,
-              private monthlyLimitsViewService: MonthlyLimitsViewService,
+  constructor(private monthlyLimitsViewService: MonthlyLimitsViewService,
               private router: Router) {
   }
 
@@ -54,7 +53,7 @@ export class MonthlyLimitHistoryPage implements OnInit {
     const monthlyHeader: MonthlyLimitHeader = this.getHeader(year, +month);
     this.monthlyLimitsViewService.selectPreviousHeader(monthlyHeader.id);
 
-    this.router.navigate(['/home/monthly-limits'])
+    this.router.navigate(['previous-months', monthlyHeader.id]);
     // this.limitsViewService.setMonthlyLimit(monthlyHeader.details);
   }
 
