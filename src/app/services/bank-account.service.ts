@@ -18,12 +18,15 @@ export class BankAccountService {
   get savingsAccountBalance() {
     return this._savingsAccountBalance;
   }
+
   private _checkingAccountBalance: number = 0;
-  get checkingAccountBalance(){
+  get checkingAccountBalance() {
     return this._checkingAccountBalance;
   }
 
   private ledgerEntryTarget: LedgerEntryAccountType = 'savings';
+
+  private transferSource?: LedgerEntryAccountType;
 
   constructor(private storage: StorageService) {
     this.storage.get(BankAccountService.DB_KEY_SAVINGS_ACC_ENTRIES)?.then((entries) => {
@@ -57,11 +60,11 @@ export class BankAccountService {
     entry.date = new Date();
 
     if (this.ledgerEntryTarget === 'savings') {
-      entry.balance = entry.type === LedgerType.CREDIT ? this._savingsAccountBalance + entry.amount! : this._savingsAccountBalance - entry.amount!;
+      entry.balance = this.updateBalance(entry.amount!, 'savings', entry.type!);
       this.savingsAccEntries.push(entry as LedgerEntry);
       this.saveSavingAccountEntries();
     } else {
-      entry.balance = entry.type === LedgerType.CREDIT ? this._checkingAccountBalance + entry.amount! : this._checkingAccountBalance - entry.amount!;
+      entry.balance = this.updateBalance(entry.amount!, 'checking', entry.type!);
       this.checkingAccEntries.push(entry as LedgerEntry);
       this.saveCheckingAccountEntries();
     }
@@ -73,6 +76,54 @@ export class BankAccountService {
 
   public saveCheckingAccountEntries(): void {
     this.storage.set(BankAccountService.DB_KEY_SAVINGS_ACC_ENTRIES, this.savingsAccEntries);
+  }
+
+  public setTransferPayload(source: LedgerEntryAccountType): void {
+    this.transferSource = source;
+  }
+
+  public transferAmounts(amount: number, description: string): void {
+
+    if (this.transferSource === undefined) {
+      return;
+    }
+    const createEntry: (accountType: LedgerEntryAccountType, ledgerType: LedgerType) => LedgerEntry = (accountType: LedgerEntryAccountType, ledgerType: LedgerType,) => {
+      return {
+        id: uuidv4(),
+        type: ledgerType,
+        amount: amount,
+        description: description,
+        date: new Date(),
+        balance: this.updateBalance(amount, accountType, ledgerType)
+      };
+    };
+
+    let sourceEntry: LedgerEntry;
+    let targetEntry: LedgerEntry;
+    if(this.transferSource === 'savings'){
+      sourceEntry = createEntry('savings', LedgerType.DEBIT);
+      targetEntry = createEntry('checking', LedgerType.CREDIT);
+    }else{
+      sourceEntry = createEntry('checking', LedgerType.DEBIT);
+      targetEntry = createEntry('savings', LedgerType.CREDIT);
+    }
+
+    this.savingsAccEntries.push(sourceEntry);
+    this.checkingAccEntries.push(targetEntry);
+
+    this.saveSavingAccountEntries();
+    this.saveCheckingAccountEntries();
+  }
+
+  private updateBalance(amount: number, accountType: LedgerEntryAccountType, type: LedgerType): number {
+    const currentBalance: number = accountType === 'savings' ? this._savingsAccountBalance : this._checkingAccountBalance;
+    const entryBalance: number = type === LedgerType.CREDIT ? currentBalance + amount : currentBalance - amount!;
+    if (accountType === 'savings') {
+      this._savingsAccountBalance = entryBalance;
+    } else {
+      this._checkingAccountBalance = entryBalance;
+    }
+    return entryBalance;
   }
 
   private calculateBalance(entries: LedgerEntry[]): number {

@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {ToolbarComponent} from "../../components/toolbar/toolbar.component";
 import {addIcons} from "ionicons";
-import {cashOutline, walletOutline} from "ionicons/icons";
+import {cashOutline, gitPullRequest, walletOutline} from "ionicons/icons";
 import {BankAccountService} from "../../services/bank-account.service";
 
 @Component({
@@ -17,7 +17,7 @@ import {BankAccountService} from "../../services/bank-account.service";
 export class BankAccountsPage {
 
   constructor(public bankAccountService: BankAccountService) {
-    addIcons({cashOutline, walletOutline})
+    addIcons({cashOutline, walletOutline, gitPullRequest})
   }
 
 

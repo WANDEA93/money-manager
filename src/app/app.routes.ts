@@ -24,6 +24,10 @@ export const routes: Routes = [
     path: 'add-ledger-entry',
     loadComponent: () => import('./pages/bank-accounts/add-ledger-entry/add-ledger-entry.page').then( m => m.AddLedgerEntryPage)
   },
+  {
+    path: 'transfer-amounts',
+    loadComponent: () => import('./pages/bank-accounts/transfer-amounts/transfer-amounts.page').then( m => m.TransferAmountsPage)
+  },
 
 
 
