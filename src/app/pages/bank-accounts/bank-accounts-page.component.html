@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <app-toolbar title="Bank Accounts"></app-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item-sliding>
+      <ion-item details="false" href="/bank-accounts/view/savings">
+        <ion-icon name="cash-outline" size="large"></ion-icon>
+        <ion-label>Savings Account</ion-label>
+        <ion-note slot="end"><h4>{{ bankAccountService.savingsAccountBalance }}</h4></ion-note>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="tertiary">
+          <ion-icon slot="icon-only" name="git-pull-request"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item-sliding>
+      <ion-item details="true" href="/bank-accounts/view/checking">
+        <ion-icon name="wallet-outline" size="large"></ion-icon>
+        <ion-label>Checking Account</ion-label>
+        <ion-note slot="end"><h4>{{ bankAccountService.checkingAccountBalance }}</h4></ion-note>
+      </ion-item>
+      <ion-item-options>
+        <ion-item-option color="tertiary">
+          <ion-icon slot="icon-only" name="git-pull-request"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

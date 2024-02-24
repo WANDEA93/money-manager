@@ -21,13 +21,13 @@
     </ion-item>
       }
     @empty{
-      <ion-note>There are no Entries to be Displayed</ion-note>
+      <ion-note><h2>No Expenses Reported yet</h2></ion-note>
     }
   </ion-list>
 
 @if(showAddEntry){
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button color="danger">
+    <ion-fab-button color="primary">
       <ion-icon name="add" (click)="addEntry()"></ion-icon>
     </ion-fab-button>
   </ion-fab>

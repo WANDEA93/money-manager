@@ -8,13 +8,14 @@ import {Router} from "@angular/router";
 import {addIcons} from "ionicons";
 import {checkmark, close} from "ionicons/icons";
 import {MonthlyLimitsViewService} from "../../services/monthly-limits-view.service";
+import {FormToolbarButtonsComponent} from "../../components/form-toolbar-buttons/form-toolbar-buttons.component";
 
 @Component({
   selector: 'app-add-new-monthly-limit',
   templateUrl: './add-new-month.page.html',
   styleUrls: ['./add-new-month.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ToolbarComponent, ReactiveFormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, ToolbarComponent, ReactiveFormsModule, FormToolbarButtonsComponent]
 })
 export class AddNewMonthPage {
 

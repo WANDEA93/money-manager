@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <app-toolbar title="Add Entry"></app-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="formGroup">
+    <ion-list>
+      <ion-item>
+        <ion-select formControlName="type" label="Type" labelPlacement="floating">
+          <ion-select-option [value]="LedgerType.CREDIT">Credit [+]</ion-select-option>
+          <ion-select-option [value]="LedgerType.DEBIT">Debit [-]</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="amount" type="number" labelPlacement="floating" label="Amount"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="description" type="text" labelPlacement="floating" label="Description"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <app-form-toolbar-buttons (save)="onSave()" (cancel)="onCancel()" [saveEnabled]="formGroup.valid"></app-form-toolbar-buttons>
+</ion-footer>
