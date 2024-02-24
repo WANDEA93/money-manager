@@ -28,6 +28,10 @@ export const routes: Routes = [
     path: 'transfer-amounts',
     loadComponent: () => import('./pages/bank-accounts/transfer-amounts/transfer-amounts.page').then( m => m.TransferAmountsPage)
   },
+  {
+    path: 'loan',
+    loadComponent: () => import('./pages/loan/loan.page').then( m => m.LoanPage)
+  },
 
 
 

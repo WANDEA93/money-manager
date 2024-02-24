@@ -30,6 +30,11 @@ export const routes: Routes = [
           import('../pages/exceptions/exceptions.page').then((m) => m.ExceptionsPage),
       },
       {
+        path: 'loans',
+        loadComponent: () =>
+          import('../pages/loan/loan.page').then((m) => m.LoanPage),
+      },
+      {
         path: '',
         redirectTo: '/home/monthly-limits',
         pathMatch: 'full',
