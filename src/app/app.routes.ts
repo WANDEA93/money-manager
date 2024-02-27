@@ -20,7 +20,8 @@ export const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./routes/home.routes').then(m => m.routes)
-  },  {
+  },
+  {
     path: 'add-ledger-entry',
     loadComponent: () => import('./pages/bank-accounts/add-ledger-entry/add-ledger-entry.page').then( m => m.AddLedgerEntryPage)
   },
@@ -29,11 +30,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/bank-accounts/transfer-amounts/transfer-amounts.page').then( m => m.TransferAmountsPage)
   },
   {
-    path: 'loan',
-    loadComponent: () => import('./pages/loan/loan.page').then( m => m.LoanPage)
+    path: 'loans',
+    loadChildren: () => import('./routes/loan.routes').then( m => m.loanRoutes)
   },
-
-
-
-
 ];
