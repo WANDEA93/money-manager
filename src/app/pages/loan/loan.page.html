@@ -12,15 +12,15 @@
           <h3>{{loan.lender}}</h3>
           <p>{{loan.description}}</p>
         </ion-label>
-        <ion-label>
-          {{loan.amount}}
+        <ion-label slot="end">
+          <h4>{{getAmountText(loan)}}</h4>
           <p>
             {{loan.date.toDateString()}}
           </p>
         </ion-label>
       </ion-item>
         <ion-item-options>
-          <ion-item-option color="tertiary" type="button" (click)="onSettleClick(loan)" id="present-alert">
+          <ion-item-option color="tertiary" type="button" (click)="onSettleClick(loan)">
             <ion-icon slot="icon-only" name="cash"></ion-icon>
           </ion-item-option>
         </ion-item-options>
@@ -37,11 +37,5 @@
       <ion-icon name="add" (click)="addEntry()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-  <ion-alert
-    trigger="present-alert"
-    header="Select your favorite color"
-    [buttons]="alertButtons"
-    [inputs]="alertInputs"
-  ></ion-alert>
 </ion-content>
+
