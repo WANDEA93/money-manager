@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <app-toolbar title="Create Loan"></app-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="form">
+
+    <ion-item>
+      <ion-input formControlName="amount" type="number" labelPlacement="floating" label="Amount"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input formControlName="lender" type="text" labelPlacement="floating" label="Lender"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input formControlName="description" type="text" labelPlacement="floating" label="Description"></ion-input>
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <app-form-toolbar-buttons (save)="onSave()" (cancel)="onCancel()"
+                            [saveEnabled]="form.valid"></app-form-toolbar-buttons>
+</ion-footer>
